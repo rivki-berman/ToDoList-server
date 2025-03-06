@@ -33,7 +33,6 @@ public partial class ToDoDbContext : DbContext
 
             entity.ToTable("item");
 
-            entity.Property(e => e.IsComplete).HasMaxLength(45);
             entity.Property(e => e.Name).HasMaxLength(100);
         });
 
