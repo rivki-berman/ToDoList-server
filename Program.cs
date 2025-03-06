@@ -101,7 +101,7 @@ using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 // service
 builder.Services.AddDbContext<ToDoDbContext>(options =>
-    options.UseMySql(builder.Configuration.GetConnectionString("ToDoDB"), new MySqlServerVersion(new Version(8, 0, 25))));
+    options.UseMySql(builder.Configuration.GetConnectionString("ToDoDB"), new MySqlServerVersion(new Version(9,0,0))));
 // cors
 builder.Services.AddCors(options => options.AddPolicy("AllowAll", policy =>
     policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
