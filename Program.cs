@@ -1,71 +1,4 @@
-// using Microsoft.EntityFrameworkCore;
-// using TodoApi;
 
-// var builder = WebApplication.CreateBuilder(args);
-
-// builder.Services.AddDbContext<ToDoDbContext>(option =>
-//      option.UseMySql(
-//         builder.Configuration.GetConnectionString("ToDoDB"),
-//      new MySqlServerVersion(new Version(9,0,0))));
-
-// // טיפול בבעית הקורס
-// builder.Services.AddCors(x => x.AddPolicy("all", a => a.AllowAnyHeader()
-// .AllowAnyMethod().AllowAnyOrigin()));
-
-// builder.Services.AddSwaggerGen();
-// // builder.Services.AddEndpointsApiExplorer();
-
-// var app = builder.Build();
-
-// if (app.Environment.IsDevelopment())
-// {
-//     app.UseSwagger();
-//     app.UseSwaggerUI();
-// }
-// app.UseCors("all");
-
-// // ToDoDbContext db = new();
-
-// app.MapGet("/", () => "Hello World!");
-
-// // שליפת כל המשימות
-// app.MapGet("/items", async (ToDoDbContext db) =>
-// {
-//     var items = await db.Items.ToListAsync();
-//     return Results.Ok(items);
-// });
-// // הוספת משימה
-// app.MapPost("/items", async (string name, ToDoDbContext db) =>
-// {
-//     Item newItem = new Item();
-//     newItem.Name = name;
-//     newItem.IsComplete = false;
-//     db.Add(newItem);
-//     await db.SaveChangesAsync();
-//     return Results.Ok(newItem);
-// });
-// // עדכון משימה
-// app.MapPatch("/items", async (int id, bool isComplete, ToDoDbContext db) =>
-// {
-//     var item = await db.Items.FindAsync(id);
-//     if (item == null)
-//         return null;
-//     item.IsComplete = isComplete;
-//     await db.SaveChangesAsync();
-//     return Results.Ok(item);
-// });
-// // מחיקת משימה
-// app.MapDelete("/items", async (int id, ToDoDbContext db) =>
-// {
-//     var item = await db.Items.FindAsync(id);
-//     if (item == null)
-//         return null;
-//     db.Remove(item);
-//     await db.SaveChangesAsync();
-//     return Results.Ok(item);
-// });
-
-// app.Run();
 using Microsoft.EntityFrameworkCore;
 using TodoApi;
 using Microsoft.OpenApi.Models;
@@ -103,11 +36,11 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 var app = builder.Build();
-if (app.Environment.IsDevelopment())
-{
+// if (app.Environment.IsDevelopment())
+// {
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+// }
 if (builder.Environment.IsDevelopment())
 {
     app.UseSwaggerUI(options => // UseSwaggerUI is called only in Development.
@@ -120,7 +53,7 @@ app.MapControllers();
 
 app.UseCors("All");
 
-app.MapGet("/", () => "Hello World!");
+app.MapGet("/", () => "Server API is running!");
 
 // get
 app.MapGet("/items", async (ToDoDbContext db) =>
